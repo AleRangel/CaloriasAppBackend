@@ -6,6 +6,8 @@ import com.example.demo.service.ComidaService;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +29,7 @@ public class ComidaController {
         return comidaService.mostrarTodasLasComidas(numeroDePagina, tamanoDePagina, ordenarPorID, sortDir);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/comida/{id}")
     public ResponseEntity<ComidaDTO> obtenerComdiaPorId(
             @PathVariable(name = "id") long id) {
         return ResponseEntity.ok(comidaService.obtenerComidaPorId(id));
@@ -46,6 +48,7 @@ public class ComidaController {
 
     @PutMapping("/usuario/{usuarioId}/comida/{id}")
     public ResponseEntity<ComidaDTO> actualizarComida(
+            @Valid
             @PathVariable(value = "usuarioId") long usuarioId,
             @PathVariable(value = "id") Long comidaId,
             @RequestBody ComidaDTO comidaDTO) {
@@ -53,7 +56,7 @@ public class ComidaController {
         return new ResponseEntity<>(comidaActualizada, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/comida/{id}")
     public ResponseEntity<String> borrarComida(
             @PathVariable(name = "id") Long id) {
         comidaService.borrarComida(id);

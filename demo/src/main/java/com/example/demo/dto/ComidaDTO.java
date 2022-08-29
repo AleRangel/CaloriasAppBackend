@@ -1,11 +1,23 @@
 package com.example.demo.dto;
 
+import javax.validation.constraints.NotEmpty;
+
 public class ComidaDTO {
     private Long id;
+
+    @NotEmpty    
     private String comida;
+
+    @NotEmpty
     private double gramos;
+
+    @NotEmpty
     private double proteinas;
+
+    @NotEmpty
     private double calorias;
+
+    @NotEmpty
     private double carbohidratos;
 
     public ComidaDTO(Long id, String comida, double gramos, double proteinas, double calorias, double carbohidratos) {
