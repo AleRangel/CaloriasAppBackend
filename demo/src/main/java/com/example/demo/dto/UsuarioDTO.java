@@ -1,11 +1,25 @@
 package com.example.demo.dto;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class UsuarioDTO {
 
     private Long id;
+    
+    @NotEmpty
+    @Size(min = 5,message = "El nombre de Usuario debera tener mas de 5 caracteres")
     private String usuario;
+
+    @NotEmpty(message = "El nombre no debe ser vacio o nulo")    
     private String nombre;
+
+    @NotEmpty(message = "El email no debe ser vacio")
+    @Email
     private String email;
+    
+    @NotEmpty(message = "El password no debe ser vacio")
     private String password;
 
     public UsuarioDTO() {

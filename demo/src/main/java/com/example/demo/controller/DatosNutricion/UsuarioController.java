@@ -2,6 +2,8 @@ package com.example.demo.controller.DatosNutricion;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +25,7 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @PostMapping()
-    public ResponseEntity<UsuarioDTO> guardarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
+    public ResponseEntity<UsuarioDTO> guardarUsuario(@Valid @RequestBody UsuarioDTO usuarioDTO) {
         return new ResponseEntity<>(usuarioService.crearUsuario(usuarioDTO), HttpStatus.CREATED); //
     }
 

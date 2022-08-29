@@ -2,10 +2,11 @@ package com.example.demo.dto;
 
 import javax.validation.constraints.NotEmpty;
 
+
 public class ComidaDTO {
     private Long id;
 
-    @NotEmpty    
+    @NotEmpty(message = "El nombre de comida no debe ser vacio o nulo")    
     private String comida;
 
     @NotEmpty
