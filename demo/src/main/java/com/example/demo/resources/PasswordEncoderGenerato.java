@@ -1,4 +1,4 @@
-package com.example.demo.resources;
+/* package com.example.demo.resources;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,3 +12,4 @@ public class PasswordEncoderGenerato {
     }
 
 }
+ */

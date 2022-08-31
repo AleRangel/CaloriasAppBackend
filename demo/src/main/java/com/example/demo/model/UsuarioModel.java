@@ -21,6 +21,8 @@ public class UsuarioModel {
     private String email;
     @Column(name = "password", nullable = false, columnDefinition = "TEXT")
     private String password;
+    
+    
 
     @OneToMany(mappedBy = "usuarioModel", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ComidaModel> comidaModel = new HashSet<>();
@@ -105,6 +107,18 @@ public class UsuarioModel {
 
     public void setRoles(Set<Rol> roles) {
         this.roles = roles;
+    }
+
+
+
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+
+
+    public boolean isCredentialsNonExpired() {
+        return false;
     }
 
     

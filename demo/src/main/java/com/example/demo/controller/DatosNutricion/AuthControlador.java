@@ -1,6 +1,7 @@
 package com.example.demo.controller.DatosNutricion;
 
 
+import java.security.Principal;
 import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import org.springframework.security.core.Authentication;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.Security.JWTAuthResonseDTO;
 import com.example.demo.Security.JwtTokenProvider;
+
 import com.example.demo.dto.LoginDTO;
 import com.example.demo.dto.UsuarioDTO;
 import com.example.demo.model.Rol;
@@ -87,7 +89,9 @@ public class AuthControlador {
         return new ResponseEntity<>("Usuario registrado exitosamente",HttpStatus.CREATED);
     }
 
-    
- 
+    @GetMapping("/usuarioActual")
+    public ResponseEntity<UsuarioModel> obtenerUsuarioPorEmail(Principal principal) {
+        return ResponseEntity.ok(usuarioRepository.findByEmail(principal.getName()));
+    }
 }
     

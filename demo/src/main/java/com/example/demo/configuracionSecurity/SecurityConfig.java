@@ -31,6 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 	
+	
 	@Bean
 	public JwtAuthenticationFilter jwtAuthenticationFilter() {
 		return new JwtAuthenticationFilter();
@@ -61,7 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+		auth.userDetailsService(this.userDetailsService).passwordEncoder(passwordEncoder());
 	}
 	
 	@Override

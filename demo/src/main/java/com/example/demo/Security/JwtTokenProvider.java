@@ -20,10 +20,10 @@ import io.jsonwebtoken.UnsupportedJwtException;
 @Component
 public class JwtTokenProvider {
     
-    @Value("${app.jwt-secret}")
+    @Value("JWTSecretKey")
     private String jwtSecret;
 
-    @Value("${app.jwt-expiration-milliseconds}")
+    @Value("999999")
     private int jwtExpirationInMs;
 
     public String generarToken(Authentication authentication){
