@@ -40,7 +40,7 @@ public class UsuarioServiceImp implements UsuarioService {
         UsuarioDTO usuarioDTO = new UsuarioDTO();
 
         usuarioDTO.setId(usuarioModel.getId());
-        usuarioDTO.setUsuario(usuarioModel.getUsuario());
+        usuarioDTO.setUsername(usuarioModel.getUsername());
         usuarioDTO.setNombre(usuarioModel.getNombre());
         usuarioDTO.setEmail(usuarioModel.getEmail());
         usuarioDTO.setPassword(usuarioModel.getPassword());
@@ -51,7 +51,7 @@ public class UsuarioServiceImp implements UsuarioService {
     private UsuarioModel mapearEntidad(UsuarioDTO usuarioDTO) {
         UsuarioModel usuarioModel = new UsuarioModel();
 
-        usuarioModel.setUsuario(usuarioDTO.getUsuario());
+        usuarioModel.setUsername(usuarioDTO.getUsername());
         usuarioModel.setNombre(usuarioDTO.getNombre());
         usuarioModel.setEmail(usuarioDTO.getEmail());
         usuarioModel.setPassword(usuarioDTO.getPassword());
@@ -66,5 +66,15 @@ public class UsuarioServiceImp implements UsuarioService {
                 .findById(id).orElseThrow(() -> new RecursoNoEncontrado("UsuarioModel", "id", id));
         return mapearDTO(usuarioModel);
     }
+
+    @Override
+    public void borrarUsuario(Long id) {    
+    UsuarioModel usuarioModel = usuarioRepository
+        .findById(id)
+        .orElseThrow(() -> new RecursoNoEncontrado("UsuarioModel", "id", id));
+
+    usuarioRepository.delete(usuarioModel);
+  }
+    
 
 }

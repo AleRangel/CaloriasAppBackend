@@ -15,4 +15,7 @@ public interface UsuarioService {
     // Obtiene a un usuario por id
     public UsuarioDTO obtenerUsuruarioPorId(Long id);
 
+    //borrarUsuario
+    public void borrarUsuario(Long id);
+
 }

@@ -13,8 +13,8 @@ public class UsuarioModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "Usuario", unique = true, nullable = false)
-    private String usuario;
+    @Column(name = "username", unique = true, nullable = false)
+    private String username;
     @Column(name = "nombre", nullable = false)
     private String nombre;
     @Column(name = "email", unique = true, nullable = false)
@@ -25,102 +25,90 @@ public class UsuarioModel {
     @OneToMany(mappedBy = "usuarioModel", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ComidaModel> comidaModel = new HashSet<>();
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "usuarios_roles", joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "id"))
+	private Set<Rol> roles = new HashSet<>();
+
+
+
+    
     public UsuarioModel() {
         super();
     }
 
-    public UsuarioModel(Long id, String usuario, String nombre, String email, String password) {
-        super();
+    
+
+    public UsuarioModel(Long id, String username, String nombre, String email, String password,
+            Set<ComidaModel> comidaModel, Set<Rol> roles) {
         this.id = id;
-        this.usuario = usuario;
+        this.username = username;
         this.nombre = nombre;
         this.email = email;
         this.password = password;
-
+        this.comidaModel = comidaModel;
+        this.roles = roles;
     }
 
-    /**
-     * @return Long return the id
-     */
+
+
     public Long getId() {
         return id;
     }
 
-    /**
-     * @param id the id to set
-     */
     public void setId(Long id) {
         this.id = id;
     }
 
-    /**
-     * @return String return the usuario
-     */
-    public String getUsuario() {
-        return usuario;
+    public String getUsername() {
+        return username;
     }
 
-    /**
-     * @param usuario the usuario to set
-     */
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    /**
-     * @return String return the nombre
-     */
     public String getNombre() {
         return nombre;
     }
 
-    /**
-     * @param nombre the nombre to set
-     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    /**
-     * @return String return the email
-     */
     public String getEmail() {
         return email;
     }
 
-    /**
-     * @param email the email to set
-     */
     public void setEmail(String email) {
         this.email = email;
     }
 
-    /**
-     * @return String return the password
-     */
     public String getPassword() {
         return password;
     }
 
-    /**
-     * @param password the password to set
-     */
     public void setPassword(String password) {
         this.password = password;
     }
 
-    /**
-     * @return Set<ComidaModel> return the comidaModel
-     */
     public Set<ComidaModel> getComidaModel() {
         return comidaModel;
     }
 
-    /**
-     * @param comidaModel the comidaModel to set
-     */
     public void setComidaModel(Set<ComidaModel> comidaModel) {
         this.comidaModel = comidaModel;
     }
+
+    public Set<Rol> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Rol> roles) {
+        this.roles = roles;
+    }
+
+    
+
+    
 
 }
