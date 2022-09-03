@@ -5,6 +5,11 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 @Entity
 @Table(name = "usuarios")
 public class UsuarioModel {
@@ -24,7 +29,8 @@ public class UsuarioModel {
     
     
 
-    @OneToMany(mappedBy = "usuarioModel", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "usuarioModel", cascade = CascadeType.ALL, orphanRemoval = true)    
+    @JsonIgnore
     private Set<ComidaModel> comidaModel = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

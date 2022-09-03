@@ -2,6 +2,9 @@ package com.example.demo.model;
 
 import javax.persistence.*;
 
+
+
+
 @Entity
 @Table(name = "comidas")
 public class ComidaModel {
@@ -26,7 +29,7 @@ public class ComidaModel {
     private double carbohidratos;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_Id", nullable = false)
+    @JoinColumn(name = "usuario_Id", nullable = false)    
     private UsuarioModel usuarioModel;
 
     public ComidaModel() {

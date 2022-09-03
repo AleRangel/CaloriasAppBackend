@@ -44,20 +44,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable()
-			.exceptionHandling()
-			.authenticationEntryPoint(jwtAuthenticationEntryPoint)
-			.and()
-			.sessionManagement()
-			.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-			.and()
-		    .authorizeRequests().antMatchers(HttpMethod.GET, "/api/**").permitAll()
-		    .antMatchers("/api/auth/**").permitAll()
-		    .anyRequest()
-		    .authenticated();
-			
-		http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-	}
+        http
+                .csrf()
+                .disable()
+                .cors()
+                .disable()
+                .authorizeRequests()
+                .antMatchers("/api/auth/**").permitAll()
+                .antMatchers("/api/buscar/**").permitAll()
+                .antMatchers(HttpMethod.OPTIONS).permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+    }
+	
 
 
 	@Override
