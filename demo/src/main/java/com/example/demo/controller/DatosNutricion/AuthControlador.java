@@ -34,7 +34,7 @@ import com.example.demo.repository.UsuarioRepository;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "*", methods = {RequestMethod.POST, RequestMethod.GET} )
+/* @CrossOrigin(origins = "*", methods = {RequestMethod.POST, RequestMethod.GET} ) */
 public class AuthControlador {
     
     @Autowired
