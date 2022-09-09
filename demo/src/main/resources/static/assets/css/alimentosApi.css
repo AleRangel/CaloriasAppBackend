@@ -33,29 +33,39 @@
     color: rgb(255, 255, 255);
 }
 #FORM{
-    padding-top: 5vh;
+    padding-left: 10PX;
+    
     
 }
 #FORM h6{
     text-align: center;
 }
-@media(max-width:425px){
+@media(max-width:425px){    
+
     #FORM input{
-        margin-left: 30px;
-        width: 94%;
+       
+        margin: 0 auto;
+        width: 75%;
     }
     #FORM button{
-        margin-left: 32px;
+        margin-left: 10px;
         width: 40%;
     }
+
+    #FORM button{
+        
+        width: 30%;
+    }
+
+
 }
-@media(max-width:362px){
+/* @media(max-width:362px){
     #FORM input{
-        /* margin-left: 100px; */
+        
         width: 92%;
     }
     #FORM button{
-        /* margin-left: 100px; */
+        
         width: 30%;
     }
-}
+}  */

@@ -351,7 +351,7 @@ class Scraper{
                 headers: {"Content-Type": "application/json",}                
             }).then(resp => resp.json()).then(datos => {
 
-                /* formatearDatos(datos, formulario.alimento, formulario.gramos); */
+                console.log(datos);
                this.formatearDatos(datos,alimentoBuscar,cuantosGramos);                
             });              
 
@@ -365,7 +365,7 @@ class Scraper{
         if (localStorage.getItem("token") == null){
             this.loger = false;
         }else{
-            console.log(localStorage.getItem("token"));
+            
             this.loger = true;
         }
         
@@ -380,25 +380,25 @@ class Scraper{
         
         datos.forEach(element => {        
             
-            let e = element.toLowerCase();
             
-            switch (e) {
-                case "calorías":
+            
+            switch (element) {
+                case "Calories":
                     let calorias = datos.indexOf(element) + 1;
                     
-                    datosDeAlimentos.calorias = Math.floor(parseFloat(datos[calorias]) / 100 * gramos);
+                    datosDeAlimentos.calorias = parseFloat(datos[calorias]) / 100 * gramos;
                     
                     break;
-                case "grasas":
-                    let grasas = datos.indexOf(element) + 2;
-                    datosDeAlimentos.grasas = Math.floor(parseFloat(datos[grasas]) / 100 * gramos);
+                case "Fat":
+                    let grasas = datos.indexOf(element) + 1;
+                    datosDeAlimentos.grasas = parseFloat(datos[grasas]) / 100 * gramos;
                     break;
-                case "carbohidratos":
+                case "Carbohydrate":
                     let carbohidratos = datos.indexOf(element) + 1;
                             
-                    datosDeAlimentos.carbohidratos = Math.floor(parseFloat(datos[carbohidratos]) / 100.0 * gramos);
+                    datosDeAlimentos.carbohidratos = parseFloat(datos[carbohidratos]) / 100.0 * gramos;
                     break;
-                case "proteínas":
+                case "Protein":
                     let proteinas = datos.indexOf(element) + 1;
                                 
                         datosDeAlimentos.proteinas = parseFloat(datos[proteinas]) / 100.0 * gramos;
@@ -409,13 +409,13 @@ class Scraper{
                                 
         });
         this.datosBusqueda = datosDeAlimentos;
-        console.log(this.datosBusqueda);
+        console.log(datosDeAlimentos);
         this.mostrarDatos(this.datosBusqueda);            
     }
 
     mostrarDatos(datosAlimentos) {
         const form = document.querySelectorAll("input");
-        console.log(typeof datosAlimentos.calorias);
+       
         if ( typeof datosAlimentos.calorias != "number") {
             this.notificacion("El Alimento no fue encontrado intenta manualmente en tu calculadora", "false");
                    

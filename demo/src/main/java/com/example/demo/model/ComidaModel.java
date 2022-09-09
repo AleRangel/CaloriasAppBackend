@@ -16,16 +16,16 @@ public class ComidaModel {
     @Column(name = "comida", nullable = false)
     private String comida;
 
-    @Column(name = "gramos", nullable = false, columnDefinition = "DECIMAL (5,2)")
+    @Column(name = "gramos", nullable = false, columnDefinition = "DECIMAL (10,2)")
     private double gramos;
 
-    @Column(name = "proteinas", nullable = false, columnDefinition = "DECIMAL (5,2)")
+    @Column(name = "proteinas", nullable = false, columnDefinition = "DECIMAL (10,2)")
     private double proteinas;
 
     @Column(name = "calorias", nullable = false, columnDefinition = "DECIMAL (10,2)")
     private double calorias;
 
-    @Column(name = "carbohidratos", nullable = false, columnDefinition = "DECIMAL (5,2)")
+    @Column(name = "carbohidratos", nullable = false, columnDefinition = "DECIMAL (10,2)")
     private double carbohidratos;
 
     @ManyToOne(fetch = FetchType.LAZY)

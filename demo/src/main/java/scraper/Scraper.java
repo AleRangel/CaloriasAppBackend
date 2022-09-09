@@ -25,7 +25,7 @@ public class Scraper {
 
         ArrayList<String> datosNutricionalesBruto = new ArrayList<String>();
 
-        Document datos = Scraper.getHTML("https://www.google.com/search?q="+alimento+"+calories");
+        Document datos = Scraper.getHTML("https://www.google.com.mx/search?q="+alimento+"+calories");
 
         Elements datosTabla2 = datos.select("td");
 
