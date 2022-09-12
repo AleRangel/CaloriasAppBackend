@@ -48,8 +48,8 @@ class InicioSesion  {
 
                 if (response.ok) {
                     this.response = true;
-                    this.inicioSesionTrue(result.tokenDeAcceso)
-                    this.obteniendoPerfil();                    
+                    this.inicioSesionTrue(result.tokenDeAcceso);
+                                      
                 }else{
                     this.response = false;
                     this.notificacion("Tu usuario o contraseña son incorrectos intenta de nuevo");
@@ -80,7 +80,6 @@ class InicioSesion  {
     alCargarPagina(){
         window.addEventListener("load", ()=>{            
                 this.obteniendoPerfil();
-                
         })
     }
 
@@ -113,6 +112,8 @@ class InicioSesion  {
             })
         })
     }
+
+    
 
     notificacion(mensaje){
         if (this.response) {           
@@ -351,7 +352,7 @@ class Scraper{
                 headers: {"Content-Type": "application/json",}                
             }).then(resp => resp.json()).then(datos => {
 
-                console.log(datos);
+                /* console.log(datos); */
                this.formatearDatos(datos,alimentoBuscar,cuantosGramos);                
             });              
 
@@ -409,7 +410,7 @@ class Scraper{
                                 
         });
         this.datosBusqueda = datosDeAlimentos;
-        console.log(datosDeAlimentos);
+        /* console.log(datosDeAlimentos); */
         this.mostrarDatos(this.datosBusqueda);            
     }
 
@@ -550,7 +551,7 @@ class TablaCalculadora{
         }).then(response => {
             response.json().then(result =>{
                 this.datosDB = result
-                console.log(this.datosDB);
+                /* console.log(this.datosDB); */
                 this.agregarDatos();
             })
         })
@@ -659,7 +660,7 @@ class TablaCalculadora{
         const $btn_eliminar = document.querySelectorAll('.btnElimina');
         $btn_eliminar.forEach(element => {
             element.addEventListener('click', (evento) =>{
-                console.log("KDDDD");
+                
                 this.eliminarComida(evento);    
             });
         
@@ -755,32 +756,48 @@ class TablaCalculadora{
     eliminarComida(e) {
         
         let alimento, alimentoID;
-        console.log("xdddddd");
+        
         if (e.target.classList.contains('eliminar-comida')) {
             alimento = e.target;        
             alimentoID = parseFloat( alimento.getAttribute("data-id"));
         }else{
             console.log("error");
         }
-        console.log(alimentoID + " xdd");
+        
         this.eliminarDeBD(alimentoID);
     }
 
     eliminarDeBD(alimentoID){
         const token = localStorage.getItem('token')
-        console.log(alimentoID);
+        /* console.log(alimentoID); */
         fetch(`/api/comida/${alimentoID}`,{
             method: 'DELETE',
             headers: {'Content-Type': 'application/json',
                       'Authorization': 'Bearer ' + token}
         }).then(response => {
-            if (response.ok) {
-               Swal.fire("Se borro con exito");
-               window.location.reload();
-            }else{
-                Swal.fire("Ocurrio un ERROR!");
-                window.location.reload();
 
+            if (response.ok) {
+                function recarga () {    
+                   window.location.reload();
+                };
+                
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Se borro con exito',
+                    showConfirmButton: false,
+                    timer: 1500
+                  })                
+                setTimeout(recarga, 1500);
+            }else{
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Ocurrio un error intenta de nuevo',
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+                  setTimeout(recarga, 1500);
             }
 
         });
@@ -792,11 +809,11 @@ class TablaCalculadora{
     obtenerDatosform(){
         this.$form.addEventListener('submit',(e)=>{
             e.preventDefault();
-            console.log(this.$form);
+            /* console.log(this.$form); */
             const data = Object.fromEntries(
                 new FormData(e.target)
             )
-            console.log(data);
+            /* console.log(data); */
             this.agregarDatosBD(data);
             this.$form.reset();
         })
