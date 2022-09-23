@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class DatosNutricionModelController {
 
     @GetMapping("/{alimento}")
-    public ArrayList buscarAlimento(@PathVariable String alimento) {
+    public ArrayList<String> buscarAlimento(@PathVariable String alimento) {
         DatosNutricion datosNutricion = new DatosNutricion(alimento);
         ArrayList<String> alimentos = new ArrayList<>();
         alimentos = datosNutricion.mandarDatos();
